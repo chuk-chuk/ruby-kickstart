@@ -7,6 +7,6 @@
 
 class String
   def every_other_char
-    self.chars.map.with_index {|c,i| c if i % 2 == 0}.compact.join
+    self.chars.select.with_index {|c,i| c if i % 2 == 0}.join
   end
 end
