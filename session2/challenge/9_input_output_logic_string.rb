@@ -13,7 +13,6 @@
 #
 # example:
 #
-#
 # USER:     $ ruby 9_input_output_logic_string.rb
 # USER:     hi grandma.
 # GRANDMA:  HUH?! SPEAK UP, SONNY!
@@ -24,12 +23,16 @@
 # USER:     BYE
 
 def deaf_grandma
-
+  while true
+    user_say = gets.chomp
+    break if user_say == "BYE"
+    if user_say == user_say.upcase && user_say != ""
+      puts "NO, NOT SINCE 1938!"
+    else
+      puts "HUH?! SPEAK UP, SONNY!"
+    end
+  end
 end
-
-
-
-
 
 # This will call your code so you can run it from the terminal.
 # But not call it otherwise, so that it will work with our tests.
