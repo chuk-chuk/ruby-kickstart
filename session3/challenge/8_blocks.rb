@@ -24,16 +24,18 @@
 # artist.name   # => "The Artist Formarly Known As Prince"
 # artist.age    # => 47
 
-
 class Person
-  attr_accessor :name
+  attr_accessor :name, :age, :quote
 
-  def initialize(&initializer)
-    @initializer = initializer
-    initializer.call self
+  def initialize(options = {}, &initializer)
+    @name = options[:name]
+    @age = options[:age]
+    @quote = options[:quote]
+    @initializer = (initializer || Proc.new {|person|})
+    reinit
   end
 
   def reinit
-    @initializer.call self
+    @initializer.call(self)
   end
 end
