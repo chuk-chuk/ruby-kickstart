@@ -21,8 +21,30 @@
 # f.to_f               # => 0.5
 
 class Fraction
+  attr_accessor :numerator, :denominator
+  def initialize(numerator, denominator)
+    @numerator = numerator
+    @denominator = denominator
+  end
+
+  def to_f
+    numerator / denominator.to_f
+    #returns ratio to a float 0.5
+  end
+
+  def lowest
+      #returns a new Fraction, where the numerator and denominator are reduced to lowest terms (ie 20/60 becomes 1/3)
+      divisor = gcd(numerator, denominator)
+    Fraction.new(numerator/divisor, denominator/divisor)
+  end
+
   def gcd(a,b)
     return a if b == 0
     gcd(b, a%b)
+  end
+
+  def to_s
+    "#{@numerator}/#{@denominator}"
+    #represents the Fraction as a String "50/100"
   end
 end
