@@ -24,10 +24,17 @@
 # pathify 'usr' => {'bin' => ['ruby'], 'include' => ['zlib.h'] }                               # => ['/usr/bin/ruby', '/usr/include/zlib.h']
 # pathify 'usr' => {'bin' => ['ruby']}, 'opt' => {'local' => {'bin' => ['sqlite3', 'rsync']} } # => ['/usr/bin/ruby', 'opt/local/bin/sqlite3', 'opt/local/bin/rsync']
 # pathify                                                                                      # => []
-#
-#
-# create it from scratch :)
 
 
-def pathify
+def pathify(paths = {})
+  return paths.map {|item| '/' + item } if paths.is_a? Array
+  to_return = []
+  paths.each do |parent_path, child_dirs|
+    parent_path = '/' + parent_path #paths begin with a /
+    child_path = pathify(child_dirs) #convert child directories to paths
+    child_path.each do |child_p|
+      to_return << (parent_path + child_p) #join each child path to it's parent path
+    end
+  end
+  to_return
 end
